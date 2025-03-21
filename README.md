@@ -5,7 +5,7 @@ This repository contains the assets used for the paper Simulating the Nervous Sy
 
 Can the human brain be thought of as nothing more then a complex computer?  Are the inner working of our thoughts and actions reducible to an algorithm?  This question is debated by both scientists and philosophers alike.  What can, however, be agreed upon is that at least some aspects of our brain can be successfully replicated by a machine.
 
-(Read More..)
+[Read the full paper ..](https://www.academia.edu/128342488/Simulating_the_Nervous_System)
 
 **Requirements**
 - PHP 7.2 (or above)
