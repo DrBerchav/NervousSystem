@@ -1,0 +1,3 @@
+#!/bin/bash
+echo $* > www/output.txt
+chmod 666 www/output.txt

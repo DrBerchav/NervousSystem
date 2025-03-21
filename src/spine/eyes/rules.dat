@@ -1,0 +1,2 @@
+1		contains($InputObject,"food")	3	dolook($WorkingMemory,$state_of_mind);
+

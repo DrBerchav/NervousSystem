@@ -1,0 +1,23 @@
+#!/bin/bash
+#if folderwatch not running add it
+if [ "$1" == "start" ] ; then
+w=`ps waux | grep "folderwatch" | grep -v "grep"`
+if [ "$w" == "" ]; then
+echo "starting folderwatch"
+if [ -e ./folderwatch ] ; then
+ ./folderwatch spine test &
+else
+ gcc folderwatch.c -o folderwatch
+ ./folderwatch spine test &
+fi
+fi
+echo $PATH | grep -q ":.$"
+m=$?
+if [ $m -eq 0 ] ; then
+echo "path okay"
+else
+export PATH=$PATH:.
+fi
+echo starting nervous-system...
+php nervous-system.php
+fi

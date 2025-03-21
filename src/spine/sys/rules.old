@@ -1,0 +1,4 @@
+2	a	autonomic(10)	3	setcputemp($WorkingMemory[0]);
+2	a	autonomic(14)	3	showticker();
+2	a	($WorkingMemory[0]["cputemp"] > 65)	3	slowspeed($WorkingMemory[0]);
+2	a	($WorkingMemory[0]["cputemp"] < 66 && WorkingMemory[0]["cputemp"] != 0)	3	morespeed($WorkingMemory[0]);

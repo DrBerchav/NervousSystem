@@ -1,0 +1,3 @@
+<? include("autonomic.inc");
+testcron();
+?>
