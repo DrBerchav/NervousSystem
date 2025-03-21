@@ -1,5 +1,6 @@
 <?php
-$aipath="/home/adminbrad/ai/nervous/spine/";
+$base=dirname(__FILE__);
+$aipath=$base . "/../spine/";
 $msg=$_GET["msg"];
 if ($msg != "")
 {

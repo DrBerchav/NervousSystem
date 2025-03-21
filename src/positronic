@@ -1,5 +1,7 @@
 #!/bin/bash
 #if folderwatch not running add it
+chmod 777 www
+chmod 777 spine
 if [ "$1" == "start" ] ; then
 w=`ps waux | grep "folderwatch" | grep -v "grep"`
 if [ "$w" == "" ]; then
