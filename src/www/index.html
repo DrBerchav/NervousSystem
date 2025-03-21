@@ -53,7 +53,6 @@ Take care of your pet by using the buttons above.
 <td>
 <img id="pet" src="happy.jpg" size="400px" width="400px" />
 </table>
-
 </body>
 <script>
 var mood="happy";
@@ -68,6 +67,12 @@ moodAry["happy"]="happy.jpg";
 moodAry["sad"]="sad.png";
 moodAry["tired"]="tired.png";
 
+function playsound(soundfile)
+{
+var audio = new Audio(soundfile);
+audio.play();
+}
+
 function updateboard()
 {
 document.getElementById("mood").textContent=mood;
@@ -75,6 +80,8 @@ document.getElementById("happiness").textContent=Happiness;
 document.getElementById("energy").textContent=Energy;
 document.getElementById("hunger").textContent=Hunger;
 document.getElementById("pet").src=moodAry[mood];
+if (mood == "tired") playsound("tired-panting.wav");
+if (mood == "sad") playsound("sad-wimper.wav");
 }
 
 function dohappy(v)
@@ -180,6 +187,8 @@ function playfetch()
 document.getElementById("pet").src="playing.png";
 document.getElementById("output").value="touch fetch";
 window.setTimeout(senddata,2500);
+playsound("happy-puppy.wav");
+playsound("dog-play.wav");
 //alert ("hello");
 //dohappy(1);
 //fetch should return a JSON array of Happy+3, Energy-2; and Hunger+1
@@ -190,6 +199,7 @@ function showfood()
 document.getElementById("pet").src="pizza.png";
 document.getElementById("output").value="eyes food";
 window.setTimeout(senddata,2500);
+playsound("panting.wav");
 //fetch should return a JSON array of Salivates, Happy+2
 }
 
@@ -198,6 +208,7 @@ function givefood()
 document.getElementById("pet").src="eating.jpg";
 document.getElementById("output").value="mouth food";
 window.setTimeout(senddata,2500);
+playsound("eating.wav");
 //alert ("hello");
 //dohappy(1);
 //fetch should return a JSON array of Energy+1,Hunger-3
@@ -208,6 +219,7 @@ function dopet()
 document.getElementById("pet").src="happy.jpg";
 document.getElementById("output").value="touch pet";
 window.setTimeout(senddata,2500);
+playsound("panting.wav");
 //alert ("hello");
 //dohappy(1);
 //fetch should return a JSON array of Happy+2
@@ -217,6 +229,7 @@ function saygoodboy()
 {
 document.getElementById("pet").src="happy.jpg";
 document.getElementById("output").value="ears praise";
+playsound("happy-puppy.wav");
 window.setTimeout(senddata,2500);
 
 }
