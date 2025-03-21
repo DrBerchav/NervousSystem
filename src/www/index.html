@@ -1,0 +1,233 @@
+<html>
+<head>
+<title>Simple AI Console Tester v1</title>
+<style>
+.button {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: white; 
+  color: green;
+  border: 2px solid #04AA6D;
+}
+</style>
+</head>
+<body>
+<h1>Simple AI Console Tester: Pet Simulation</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table>
+<td valign="top">
+<button class="button" onClick="playfetch();" id="go">Play Fetch</button>
+<button class="button" onClick="showfood();" id="go">Show Food</button>
+<button class="button" onClick="givefood();" id="go">Give Food</button>
+<button class="button" onClick="dopet();" id="go">Pet</button>
+<button class="button" onClick="saygoodboy();" id="go">Good Boy</button>
+<p />
+<div style="display: inline-block;  border: 2px solid #00F;width:600;height:100;" id="output">
+Take care of your pet by using the buttons above.
+</div>
+<table>
+<td>Mood</td><td id="mood">Happy</td>
+<tr/>
+<td>Happiness</td><td id="happiness">10</td>
+<tr/>
+<td>Energy</td><td id="energy">10</td>
+<tr/>
+<td>Hunger</td><td id="hunger">0</td>
+</table>
+</td>
+
+</td>
+<td>
+<img id="pet" src="happy.jpg" size="400px" width="400px" />
+</table>
+
+</body>
+<script>
+var mood="happy";
+var Happiness=10;
+var Energy=10;
+var Hunger=0;
+var counter=0;
+var moodAry = [];
+moodAry["hungry"]="hungry.png";
+moodAry["eating"]="eating.jpg";
+moodAry["happy"]="happy.jpg";
+moodAry["sad"]="sad.png";
+moodAry["tired"]="tired.png";
+
+function updateboard()
+{
+document.getElementById("mood").textContent=mood;
+document.getElementById("happiness").textContent=Happiness;
+document.getElementById("energy").textContent=Energy;
+document.getElementById("hunger").textContent=Hunger;
+document.getElementById("pet").src=moodAry[mood];
+}
+
+function dohappy(v)
+{
+Happiness = Happiness + v;
+if (Happiness > 10) Happiness = 10;
+if (Happiness < 0) Happiness = 0;
+if (Happiness > 8 && Energy > 6 && Hunger < 4) mood = "happy";
+if (Happiness < 8 && Energy < 5 ) mood="sad";
+if (Happiness < 6) mood="sad";
+if (Energy < 6) mood="tired";
+if (Hunger > 8) mood="hungry";
+
+updateboard();
+}
+
+function doenergy(v)
+{
+Energy = Energy + v;
+if (Energy > 10) Energy = 10;
+if (Energy < 0) Energy = 0;
+if (Happiness > 8 && Energy > 6 && Hunger < 4) mood = "happy";
+if (Happiness < 8 && Energy < 5 ) mood="sad";
+if (Happiness < 6) mood="sad";
+if (Energy < 6) mood="tired";
+if (Hunger > 8) mood="hungry";
+
+updateboard();
+}
+
+function dohunger(v)
+{
+Hunger = Hunger + v;
+if (Hunger > 10) Hunger = 10;
+if (Hunger < 0) Hunger=0;
+if (Happiness > 8 && Energy > 6 && Hunger < 4) mood = "happy";
+if (Happiness < 8 && Energy < 5 ) mood="sad";
+if (Happiness < 6) mood="sad";
+if (Energy < 6) mood="tired";
+if (Hunger > 8) mood="hungry";
+
+updateboard();
+}
+
+
+
+function processResponse(theText)
+{
+//alert(theText);
+if (theText.trim() != "") 
+ {
+  dstr=JSON.parse(theText);
+  for (var i in dstr)
+  {
+  if (i == "happy") dohappy(dstr[i]);
+  if (i == "energy") doenergy(dstr[i]);
+  if (i == "hunger") dohunger(dstr[i]);
+  if (i == "salivates") document.getElementById("pet").src="dogsalivates.png";
+  }
+  document.getElementById("output").textContent=theText;
+ }
+}
+
+
+function fetchpage(theUrl)
+{
+//alert(theUrl);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            processResponse(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+
+}
+
+function testautonomic()
+{
+counter++;
+if (counter > 120) counter=0
+if (counter % 5 == 0)
+{
+dohappy(-1);
+}
+if (counter % 10 == 0) dohunger(1);
+if (counter % 20 ==0) 
+{
+if (mood == "tired") doenergy(1);
+else doenergy(-1);
+}
+}
+function checkdata()
+{
+//testautonomic();
+fetchpage("talk.php");
+window.setTimeout(checkdata,1500);
+
+}
+
+function playfetch()
+{
+document.getElementById("pet").src="playing.png";
+document.getElementById("output").value="touch fetch";
+window.setTimeout(senddata,2500);
+//alert ("hello");
+//dohappy(1);
+//fetch should return a JSON array of Happy+3, Energy-2; and Hunger+1
+}
+
+function showfood()
+{
+document.getElementById("pet").src="pizza.png";
+document.getElementById("output").value="eyes food";
+window.setTimeout(senddata,2500);
+//fetch should return a JSON array of Salivates, Happy+2
+}
+
+function givefood()
+{
+document.getElementById("pet").src="eating.jpg";
+document.getElementById("output").value="mouth food";
+window.setTimeout(senddata,2500);
+//alert ("hello");
+//dohappy(1);
+//fetch should return a JSON array of Energy+1,Hunger-3
+}
+
+function dopet()
+{
+document.getElementById("pet").src="happy.jpg";
+document.getElementById("output").value="touch pet";
+window.setTimeout(senddata,2500);
+//alert ("hello");
+//dohappy(1);
+//fetch should return a JSON array of Happy+2
+}
+
+function saygoodboy()
+{
+document.getElementById("pet").src="happy.jpg";
+document.getElementById("output").value="ears praise";
+window.setTimeout(senddata,2500);
+
+}
+
+
+function senddata()
+{
+var info=document.getElementById("output").value;
+fetchpage("talk.php?msg="+info);
+}
+
+checkdata();
+</script>
+</html>

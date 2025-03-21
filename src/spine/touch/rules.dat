@@ -1,0 +1,2 @@
+1		contains($InputObject,"fetch")	3	playfetch();
+2		contains($InputObject,"pet")	3	dopet();

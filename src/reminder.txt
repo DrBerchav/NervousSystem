@@ -1,0 +1,3 @@
+be sure to link www to your apache folder
+ie:
+sudo ln -s $(pwd)/www /var/www/html/ai

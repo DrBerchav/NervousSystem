@@ -1,0 +1,1 @@
+1		contains($InputObject,"praise")	3	dopraise($WorkingMemory,$TheMatrix);

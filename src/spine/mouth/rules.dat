@@ -1,0 +1,2 @@
+1		contains($InputObject,"food")	3	domouth($WorkingMemory[0],$TheMatrix);
+
