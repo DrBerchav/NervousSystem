@@ -22,3 +22,5 @@ Can the human brain be thought of as nothing more then a complex computer?  Are 
 You can set the $DEBUG variable inside nervous-system.php to enable or disable verbose output as desired.
 
 ### Video of Expirements Preformed
+
+https://github.com/DrBerchav/NervousSystem/raw/refs/heads/main/pet_simulation_expirements.mp4
