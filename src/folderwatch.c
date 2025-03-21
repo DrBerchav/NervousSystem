@@ -84,13 +84,14 @@ int main(int argc, char *argv[])
             struct inotify_event *event = (struct inotify_event *) &buffer[i];
             if (event->len) {
                 if (event->mask & IN_MODIFY) {
-                    //printf("File modified: %s\n", event->name);
+//                    printf("File modified: %s\n", event->name);
                     //system(command);
                     char absFile[PATH_MAX];  
                     strcpy(absFile,DIRS[event->wd]);
                     strcat(absFile,"/");
                     strcat(absFile,event->name);
-                    if (strcmp(absFile,lastmatch) != 0)
+
+                    if (strcmp(absFile,lastmatch) != 0 || access("msgqueue.dat", F_OK) != 0)
                     {
                     strcpy(lastmatch,absFile);
                     FILE *outFile=fopen("msgqueue.dat","a");
@@ -103,7 +104,7 @@ int main(int argc, char *argv[])
                     strcpy(absFile,DIRS[event->wd]);
                     strcat(absFile,"/");
                     strcat(absFile,event->name);
-                    if (strcmp(absFile,lastmatch) != 0)
+                    if (strcmp(absFile,lastmatch) != 0 || access("msgqueue.dat", F_OK) != 0)
                     {
 
                     FILE *outFile=fopen("msgqueue.dat","a");
