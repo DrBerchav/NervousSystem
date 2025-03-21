@@ -16,7 +16,7 @@ Can the human brain be thought of as nothing more then a complex computer?  Are 
 ### Getting Started
 
 1) Link the 'www' directory to an approperaiate directory inside your webserver
-2) Ensure that the webserver can both read & write to your virtual directory
+2) Ensure that the webserver can both read & write to your virtual directory (chmod -R 777 spine / chmod -R 777 www)
 3) Start the nervous system with the command '**positronic start**'. Note this will compile the folderwatcher if necessary
 
 You can set the $DEBUG variable inside nervous-system.php to enable or disable verbose output as desired.
